@@ -56,5 +56,5 @@ def main():
     while True:      # I added this loop so that testing wouldn't take absolutely forever
         check(username, password)
 
-if __name__ == "__main__":
+if __name__ == "main":
     main()
