@@ -27,7 +27,6 @@ def load_creds(filename):
         return data['username'], data['password']
     except FileNotFoundError:
         print(f"Unable to open file {filename}.")
-        exit()
         
 
 def check(usernames, passwords):
