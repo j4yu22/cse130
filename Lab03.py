@@ -1,13 +1,14 @@
 # 1. Name:
-#      -your name-
+#      Jay Underwood
 # 2. Assignment Name:
 #      Lab 04: Monopoly
 # 3. Assignment Description:
 #      This program simulates a decision-making process for purchasing houses and hotels in a Monopoly game.
 # 4. What was the hardest part? Be as specific as possible.
-#      The hardest part was managing the various conditions for the Monopoly rules and ensuring the user receives immediate feedback for invalid inputs.
+#      There wasn't anything too difficult, it was mostly just very tedious due to the number of outcomes possible.
+#      The hardest part was probably getting the program to jump to conclusions as soon as possible, such as the moment a user says they don't own all green squares.
 # 5. How long did it take for you to complete the assignment?
-#      -total time in hours including reading the assignment and submitting the program-
+#      It took me about 3 hours to do this project, spread across a couple of days.
 
 def get_contents(square):
     """
@@ -56,6 +57,10 @@ def get_all_info():
         return ownership, None, None, pa_content, None, None, None, None
     pc_content = get_contents(pc)
     nc_content = get_contents(nc)
+    if pc_content == 5 and pa_content == 4 and nc_content == 4:
+        return ownership, pc_content, nc_content, pa_content, None, None, None, None
+    if pc_content == 4 and pa_content == 4 and nc_content == 5:
+        return ownership, pc_content, nc_content, pa_content, None, None, None, None
     
     cost = 2600 - (200 * pc_content + 200 * nc_content + 200 * pa_content)
     
