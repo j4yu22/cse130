@@ -68,6 +68,7 @@ def main():
     name_list = read_json_file(file_path)
     
     if not name_list:
+        print("This JSON is empty.")
         return
     
     target_name = input("What name are we looking for? ")
