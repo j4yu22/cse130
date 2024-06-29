@@ -5,9 +5,10 @@
 # 3. Assignment Description:
 #      This program calculates the number of days between two given dates, accounting for leap years and validating input.
 # 4. What was the hardest part? Be as specific as possible.
-#      The hardest part was implementing the input validation to make sure the user enters valid dates and handling edge cases such as leap years and invalid months or days.
+#      The hardest part was implementing the input validation to make sure the user enters valid dates and handling edge cases such as leap years and invalid months or days. There was also some trouble shooting when the dates were the same.
 # 5. How long did it take for you to complete the assignment?
 #      About 4 hours total
+
 
 def is_leap_year(year):
     """Determine if a year is a leap year.
@@ -70,32 +71,30 @@ def days_between_dates(start_date, end_date):
     if (start_year, start_month, start_day) > (end_year, end_month, end_day):
         return "End date must be after start date"
 
+    if (start_year, start_month, start_day) == (end_year, end_month, end_day):
+        return 0
+
     total_days = 0
 
     if start_year == end_year:
-        for month in range(start_month, end_month + 1):
-            if month == start_month:
-                total_days += days_in_month(month, start_year) - start_day
-            elif month == end_month:
-                total_days += end_day
-            else:
+        if start_month == end_month:
+            total_days = end_day - start_day
+        else:
+            total_days += days_in_month(start_month, start_year) - start_day + 1
+            for month in range(start_month + 1, end_month):
                 total_days += days_in_month(month, start_year)
+            total_days += end_day
     else:
-        for month in range(start_month, 13):
-            if month == start_month:
-                total_days += days_in_month(month, start_year) - start_day
-            else:
-                total_days += days_in_month(month, start_year)
-
+        total_days += days_in_month(start_month, start_year) - start_day + 1
+        for month in range(start_month + 1, 13):
+            total_days += days_in_month(month, start_year)
+        
         for year in range(start_year + 1, end_year):
-            for month in range(1, 13):
-                total_days += days_in_month(month, year)
+            total_days += 366 if is_leap_year(year) else 365
 
-        for month in range(1, end_month + 1):
-            if month == end_month:
-                total_days += end_day
-            else:
-                total_days += days_in_month(month, end_year)
+        for month in range(1, end_month):
+            total_days += days_in_month(month, end_year)
+        total_days += end_day
 
     return total_days
 
